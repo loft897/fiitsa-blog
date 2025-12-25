@@ -10,7 +10,7 @@ import type { PostPreview } from "@/lib/types";
 
 export function ArticleCard({ post }: { post: PostPreview }) {
   return (
-    <Card className="group overflow-hidden border-border/60 bg-white/80 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:bg-card">
+    <Card className="group gap-0 overflow-hidden border-border/60 bg-white/80 py-0 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:bg-card">
       <CardHeader className="p-0">
         <Link href={`/articles/${post.slug}`} className="block">
           <div className="relative h-48 w-full overflow-hidden">

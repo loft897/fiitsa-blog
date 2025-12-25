@@ -78,42 +78,50 @@ export function ArticlesFilters({
           className="pl-9"
         />
       </div>
-      <Select value={category} onValueChange={setCategory}>
-        <SelectTrigger>
-          <SelectValue placeholder={t.categoryPlaceholder} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">{t.allCategories}</SelectItem>
-          {categories.map((item) => (
-            <SelectItem key={item} value={item}>
-              {item}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Select value={tag} onValueChange={setTag}>
-        <SelectTrigger>
-          <SelectValue placeholder={t.tagPlaceholder} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">{t.allTags}</SelectItem>
-          {tags.map((item) => (
-            <SelectItem key={item} value={item}>
-              {item}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <div className="md:col-span-3">
-        <Select value={sort} onValueChange={setSort}>
-          <SelectTrigger>
-            <SelectValue placeholder={t.sortPlaceholder} />
+      <div className="mx-auto grid max-w-md grid-cols-3 gap-x-[10px] gap-y-2 md:col-span-4 md:contents">
+        <Select value={category} onValueChange={setCategory}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder={t.categoryPlaceholder} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="recent">{t.sortRecent}</SelectItem>
-            <SelectItem value="popular">{t.sortPopular}</SelectItem>
+          <SelectItem value="all">
+            <span className="hidden sm:inline">{t.allCategories}</span>
+            <span className="sm:hidden">{t.categoryPlaceholder}</span>
+          </SelectItem>
+            {categories.map((item) => (
+              <SelectItem key={item} value={item}>
+                {item}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
+        <Select value={tag} onValueChange={setTag}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder={t.tagPlaceholder} />
+          </SelectTrigger>
+          <SelectContent>
+          <SelectItem value="all">
+            <span className="hidden sm:inline">{t.allTags}</span>
+            <span className="sm:hidden">{t.tagPlaceholder}</span>
+          </SelectItem>
+            {tags.map((item) => (
+              <SelectItem key={item} value={item}>
+                {item}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <div className="md:col-span-3">
+          <Select value={sort} onValueChange={setSort}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={t.sortPlaceholder} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="recent">{t.sortRecent}</SelectItem>
+              <SelectItem value="popular">{t.sortPopular}</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <Button className="bg-[#FFD700] text-[#2D0A49] hover:bg-[#FFD700]/90" onClick={applyFilters}>
         {t.apply}

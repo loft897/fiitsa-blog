@@ -52,11 +52,11 @@ export default async function ArticlesPage({
 
   return (
     <div className="space-y-10 [--primary:51_100%_50%] [--primary-foreground:45_100%_10%]">
-      <div>
-        <h1 className="text-3xl font-semibold text-primary">
+      <div className="text-center md:text-left">
+        <h1 className="text-3xl font-semibold text-primary md:text-left">
           <Trans fr="Tous les articles" en="All articles" />
         </h1>
-        <p className="mt-2 text-sm text-primary/80">
+        <p className="mt-2 text-sm text-primary/80 md:text-left">
           <Trans
             fr="Explorez tous nos contenus autour du business en ligne, e-commerce et IA en Afrique."
             en="Explore all our content about online business, e-commerce, and AI in Africa."
