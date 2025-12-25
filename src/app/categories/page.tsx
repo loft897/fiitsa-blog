@@ -5,6 +5,36 @@ import { getCategories } from "@/lib/posts";
 
 export const revalidate = 300;
 
+export const metadata = {
+  title: "Categories",
+  description: "Retrouvez tous nos sujets classes par categorie.",
+  alternates: {
+    canonical: "https://www.fiitsa.com/categories",
+  },
+  openGraph: {
+    title: "Categories",
+    description: "Retrouvez tous nos sujets classés par categorie.",
+    url: "https://www.fiitsa.com/categories",
+    type: "website",
+    images: [
+      {
+        url: "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Fiitsa%20arrondi%20sans%20bg%20(1200%20x%20630%20px).png",
+        width: 1200,
+        height: 630,
+        alt: "Fiitsa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Categories",
+    description: "Retrouvez tous nos sujets classés par categorie.",
+    images: [
+      "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Fiitsa%20arrondi%20sans%20bg%20(1200%20x%20630%20px).png",
+    ],
+  },
+};
+
 export default async function CategoriesPage() {
   const categories = await getCategories();
 

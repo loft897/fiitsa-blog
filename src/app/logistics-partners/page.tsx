@@ -1,5 +1,2 @@
-"use client";
-
-import LogisticsPartners from "@/app/logistic-partners/page";
-
-export default LogisticsPartners;
+export { metadata } from "@/app/logistic-partners/page";
+export { default } from "@/app/logistic-partners/page";

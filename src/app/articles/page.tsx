@@ -10,13 +10,13 @@ export const revalidate = 120;
 
 export const metadata: Metadata = {
   title: "Articles",
-  description: "Tous les articles Fiitsa pour booster la croissance des restaurants.",
+  description: "Retrouvez les articles Fiitsa sur l'e-commerce, l'IA et la business en ligne en Afrique.",
   alternates: {
     canonical: "/articles",
   },
   openGraph: {
     title: "Articles",
-    description: "Tous les articles Fiitsa pour booster la croissance des restaurants.",
+    description: "Retrouvez les articles Fiitsa sur l'e-commerce, l'IA et la business en ligne en Afrique.",
     url: "https://www.fiitsa.com/articles",
     type: "website",
     images: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Articles",
-    description: "Tous les articles Fiitsa pour booster la croissance des restaurants.",
+    description: "Retrouvez les articles Fiitsa sur l'e-commerce, l'IA et la business en ligne en Afrique.",
     images: [
       "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Fiitsa%20arrondi%20sans%20bg%20(1200%20x%20630%20px).png",
     ],
