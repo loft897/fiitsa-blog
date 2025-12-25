@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: ogImage,
-        width: 1200,
-        height: 630,
+        width: 1024,
+        height: 1024,
         alt: "Fiitsa",
       },
     ],

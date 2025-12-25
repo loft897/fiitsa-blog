@@ -44,8 +44,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Logo%20Fiitsa.png",
-        width: 1200,
-        height: 630,
+        width: 1024,
+        height: 1024,
         alt: "Fiitsa",
       },
     ],
