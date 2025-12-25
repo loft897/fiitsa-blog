@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -8,6 +8,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
+  --color-fiitsa-purple: var(--fiitsa-purple);
+  --color-fiitsa-purple-light: var(--fiitsa-purple-light);
+  --color-fiitsa-gold: var(--fiitsa-gold);
+  --color-fiitsa-light: var(--fiitsa-light);
+  --color-fiitsa-dark: var(--fiitsa-dark);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,6 +55,11 @@
   --radius: 0.625rem;
   --background: oklch(0.99 0.01 98);
   --foreground: oklch(0.2 0.03 260);
+  --fiitsa-purple: #7b2cbf;
+  --fiitsa-purple-light: #a855f7;
+  --fiitsa-gold: #f59e0b;
+  --fiitsa-light: #f6f2ff;
+  --fiitsa-dark: #1f1a3d;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.2 0.03 260);
   --popover: oklch(1 0 0);
@@ -116,6 +126,109 @@
 }
 
 @layer base {
+  .markdown {
+    @apply text-base leading-relaxed text-foreground break-words;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .markdown h1 {
+    @apply mt-10 text-3xl font-semibold text-[#FFD700] break-words;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown h2 {
+    @apply mt-8 text-2xl font-semibold break-words;
+    background-image: linear-gradient(90deg, #FFD700 0%, #f5c84b 45%, #2D0A49 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown h3 {
+    @apply mt-6 text-xl font-semibold text-[#2D0A49] break-words;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown p {
+    @apply mt-4 text-[#2D0A49] break-words;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown ul,
+  .markdown ol {
+    @apply mt-4 space-y-2 pl-5 text-[#2D0A49] break-words;
+    overflow-wrap: anywhere;
+  }
+
+  .markdown a {
+    @apply text-primary underline-offset-4 transition hover:underline;
+  }
+
+  .markdown blockquote {
+    @apply mt-6 border-l-4 border-[#FFD700]/60 bg-muted/50 p-4 italic text-[#2D0A49];
+  }
+
+  .markdown img {
+    @apply my-6 h-auto w-full rounded-[10px] border border-border/60 object-cover;
+  }
+
+  .markdown iframe {
+    @apply my-6 w-full rounded-[10px] border border-border/60;
+  }
+
+  .markdown .mdx-figure {
+    @apply my-6;
+  }
+
+  .markdown .mdx-image {
+    @apply h-auto w-full rounded-[10px] border border-border/60 object-cover;
+  }
+
+  .markdown .mdx-caption {
+    @apply mt-2 text-sm text-[#2D0A49]/80;
+  }
+
+  .markdown .mdx-cta {
+    @apply my-4 inline-flex items-center gap-2 rounded-[10px] border border-border/60 bg-white px-4 py-2 font-semibold text-[#2D0A49] transition hover:bg-[#FFD700]/20;
+  }
+
+  .markdown .mdx-video {
+    @apply my-6 w-full rounded-[10px] border border-border/60;
+  }
+
+  .markdown pre {
+    @apply mt-6 overflow-x-auto rounded-2xl bg-muted/70 p-4 text-sm text-foreground;
+  }
+
+  .markdown code {
+    @apply rounded bg-muted px-1.5 py-0.5 text-sm break-all;
+  }
+
+  .markdown a {
+    word-break: break-word;
+  }
+
+  @media (max-width: 1024px) {
+    .markdown {
+      text-align: center;
+    }
+
+    .markdown ul,
+    .markdown ol {
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 28rem;
+    }
+
+    .markdown .mdx-cta {
+      justify-content: center;
+    }
+  }
+}layer base {
   * {
     @apply border-border outline-ring/50;
   }
@@ -150,24 +263,36 @@
 
 @layer components {
   .markdown {
-    @apply text-base leading-relaxed text-foreground;
+    @apply text-base leading-relaxed text-foreground break-words;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .markdown h1 {
+    @apply mt-10 text-3xl font-semibold text-[#FFD700] break-words;
+    overflow-wrap: anywhere;
   }
 
   .markdown h2 {
-    @apply mt-8 text-2xl font-semibold;
+    @apply mt-8 text-2xl font-semibold text-[#FFD700] break-words;
+    overflow-wrap: anywhere;
   }
 
   .markdown h3 {
-    @apply mt-6 text-xl font-semibold;
+    @apply mt-6 text-xl font-semibold text-[#FFD700] break-words;
+    overflow-wrap: anywhere;
   }
 
   .markdown p {
-    @apply mt-4 text-muted-foreground;
+    @apply mt-4 text-muted-foreground break-words;
+    overflow-wrap: anywhere;
   }
 
   .markdown ul,
   .markdown ol {
-    @apply mt-4 space-y-2 pl-5 text-muted-foreground;
+    @apply mt-4 space-y-2 pl-5 text-muted-foreground break-words;
+    overflow-wrap: anywhere;
   }
 
   .markdown a {
@@ -178,11 +303,72 @@
     @apply mt-6 border-l-4 border-primary/40 bg-muted/50 p-4 italic text-muted-foreground;
   }
 
+  .markdown img {
+    @apply my-6 h-auto w-full rounded-[10px] border border-border/60 object-cover;
+  }
+
+  .markdown iframe {
+    @apply my-6 w-full rounded-[10px] border border-border/60;
+  }
+
+  .markdown .mdx-figure {
+    @apply my-6;
+  }
+
+  .markdown .mdx-image {
+    @apply h-auto w-full rounded-[10px] border border-border/60 object-cover;
+  }
+
+  .markdown .mdx-caption {
+    @apply mt-2 text-sm text-muted-foreground;
+  }
+
+  .markdown .mdx-cta {
+    @apply my-4 inline-flex items-center gap-2 rounded-[10px] border border-border/60 bg-white px-4 py-2 font-semibold text-[#2D0A49] transition hover:bg-[#FFD700]/20;
+  }
+
+  .markdown .mdx-video {
+    @apply my-6 w-full rounded-[10px] border border-border/60;
+  }
+
   .markdown pre {
     @apply mt-6 overflow-x-auto rounded-2xl bg-muted/70 p-4 text-sm text-foreground;
   }
 
   .markdown code {
-    @apply rounded bg-muted px-1.5 py-0.5 text-sm;
+    @apply rounded bg-muted px-1.5 py-0.5 text-sm break-all;
+  }
+
+  .markdown a {
+    word-break: break-word;
+  }
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#7b2cbf 0.6px, transparent 0.6px);
+  background-size: 24px 24px;
+  opacity: 0.15;
+}
+
+.floating-particles {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#f59e0b 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.1;
+  animation: floatParticles 12s linear infinite;
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

@@ -6,10 +6,11 @@ import { Calendar, Clock, User } from "lucide-react";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ArticleContent } from "@/components/ArticleContent";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { EmbedCode } from "@/components/EmbedCode";
+import { LocalizedDate } from "@/components/LocalizedDate";
 import { Reviews } from "@/components/Reviews";
 import { ShareBar } from "@/components/ShareBar";
 import { TOC } from "@/components/TOC";
+import { Trans } from "@/components/Trans";
 import { ViewTracker } from "@/components/ViewTracker";
 import { SEOJsonLd } from "@/components/SEOJsonLd";
 import { getAllPostSlugs, getPostBySlug, getSimilarPosts, listApprovedReviews } from "@/lib/posts";
@@ -55,35 +56,47 @@ export default async function ArticlePage({
     getSimilarPosts(post),
   ]);
 
-  const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://blog.fiitsa.com"}/articles/${post.slug}`;
+  const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://fiitsa.com"}/articles/${post.slug}`;
   const readingTime = post.reading_time || estimateReadingTime(post.content);
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-10 md:space-y-14 [--primary:51_100%_50%] [--primary-foreground:45_100%_10%]">
       <ViewTracker postId={post.id} />
       <Breadcrumbs
         items={[
-          { label: "Accueil", href: "/" },
-          { label: "Articles", href: "/articles" },
+          { label: <Trans fr="Accueil" en="Home" />, href: "/" },
+          { label: <Trans fr="Articles" en="Articles" />, href: "/articles" },
           { label: post.title, href: `/articles/${post.slug}` },
         ]}
       />
 
-      <section className="grid gap-10 lg:grid-cols-[2fr_1fr]">
-        <div className="space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-3xl font-semibold md:text-4xl">{post.title}</h1>
-            <p className="text-lg text-muted-foreground">
-              {post.description || "Un guide complet pour accelerer la croissance de votre restaurant."}
+      <section className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
+        <div className="space-y-6 md:space-y-8">
+          <div className="lg:hidden">
+            <TOC content={post.content} />
+          </div>
+          <div className="space-y-3 md:space-y-4">
+            <h1 className="text-2xl font-semibold leading-tight text-primary sm:text-3xl md:text-4xl">
+              {post.title}
+            </h1>
+            <p className="text-base text-primary/80 sm:text-lg">
+              {post.description ? (
+                post.description
+              ) : (
+                <Trans
+                  fr="Un guide complet pour accélérer la croissance de votre restaurant."
+                  en="A complete guide to accelerate your restaurant's growth."
+                />
+              )}
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground sm:gap-4 sm:text-sm">
               <span className="inline-flex items-center gap-2">
                 <User className="h-4 w-4" />
-                {post.author_name || "Equipe Fiitsa"}
+                {post.author_name || <Trans fr="Équipe Fiitsa" en="Fiitsa Team" />}
               </span>
               <span className="inline-flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                {post.published_at ? new Date(post.published_at).toLocaleDateString("fr-FR") : ""}
+                {post.published_at ? <LocalizedDate date={post.published_at} /> : ""}
               </span>
               <span className="inline-flex items-center gap-2">
                 <Clock className="h-4 w-4" />
@@ -91,7 +104,8 @@ export default async function ArticlePage({
               </span>
             </div>
           </div>
-          <div className="relative h-72 w-full overflow-hidden rounded-[28px] border border-border/60">
+          <ShareBar url={articleUrl} title={post.title} embedSlug={post.slug} />
+          <div className="relative h-48 w-full overflow-hidden rounded-2xl border border-border/60 sm:h-64 md:h-72 lg:h-80">
             <Image
               src={post.cover_url || "/og-default.png"}
               alt={post.title}
@@ -101,34 +115,49 @@ export default async function ArticlePage({
               priority
             />
           </div>
-          <ShareBar url={articleUrl} title={post.title} />
+          <ShareBar url={articleUrl} title={post.title} embedSlug={post.slug} />
           <ArticleContent content={post.content} />
-          <div className="grid gap-4 md:grid-cols-2">
-            <EmbedCode slug={post.slug} />
-            <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-              <p className="text-sm font-semibold">Tags et categories</p>
-              <div className="mt-3 flex flex-wrap gap-2 text-sm text-muted-foreground">
-                {post.category_slug && (
-                  <Link href={`/categories/${post.category_slug}`}>#{post.category_slug}</Link>
-                )}
-                {(post.tags || []).map((tag) => (
-                  <Link key={tag} href={`/tags/${tag}`}>
-                    #{tag}
-                  </Link>
-                ))}
-              </div>
+          <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
+            <p className="text-sm font-semibold text-primary">
+              <Trans fr="Tags et catégories" en="Tags and categories" />
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2 text-sm text-muted-foreground">
+              {post.category_slug && (
+                <Link
+                  href={`/categories/${post.category_slug}`}
+                  className="rounded-full border border-[#FFD700]/50 bg-[#FFD700]/15 px-3 py-1 text-xs font-semibold text-[#2D0A49]"
+                >
+                  Categorie: #{post.category_slug}
+                </Link>
+              )}
+              {(post.tags || []).map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/tags/${tag}`}
+                  className="rounded-full border border-[#2D0A49]/20 bg-[#2D0A49]/5 px-3 py-1 text-xs font-medium text-[#2D0A49]"
+                >
+                  Tag: #{tag}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
-        <div className="space-y-6">
-          <TOC content={post.content} />
+        <div className="space-y-6 lg:sticky lg:top-24">
+          <div className="hidden lg:block">
+            <TOC content={post.content} />
+          </div>
           <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
-            <p className="text-sm font-semibold">Partager</p>
+            <p className="text-sm font-semibold text-primary">
+              <Trans fr="Partager" en="Share" />
+            </p>
             <p className="mt-2 text-xs text-muted-foreground">
-              Partagez cet article avec votre equipe.
+              <Trans
+                fr="Partagez cet article avec votre équipe."
+                en="Share this article with your team."
+              />
             </p>
             <div className="mt-3">
-              <ShareBar url={articleUrl} title={post.title} />
+              <ShareBar url={articleUrl} title={post.title} embedSlug={post.slug} />
             </div>
           </div>
         </div>
@@ -146,9 +175,11 @@ export default async function ArticlePage({
       {similarPosts.length > 0 && (
         <section className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">Articles similaires</h2>
+            <h2 className="text-2xl font-semibold text-primary">
+              <Trans fr="Articles similaires" en="Related articles" />
+            </h2>
             <Link href="/articles" className="text-sm text-muted-foreground">
-              Voir tous les articles
+              <Trans fr="Voir tous les articles" en="See all articles" />
             </Link>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

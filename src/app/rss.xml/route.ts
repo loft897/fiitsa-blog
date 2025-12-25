@@ -11,7 +11,7 @@ export async function GET() {
     })
     .join("\n");
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Fiitsa Blog</title>\n    <link>${absoluteUrl("/")}</link>\n    <description>Strategies et operations pour restaurants.</description>\n    ${items}\n  </channel>\n</rss>`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0">\n  <channel>\n    <title>Fiitsa Blog</title>\n    <link>${absoluteUrl("/")}</link>\n    <description>Stratégies et opérations pour restaurants.</description>\n    ${items}\n  </channel>\n</rss>`;
 
   return new Response(xml, {
     headers: {

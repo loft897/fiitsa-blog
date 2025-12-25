@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { LocalizedDate } from "@/components/LocalizedDate";
+import { Trans } from "@/components/Trans";
 import type { PostPreview } from "@/lib/types";
 
 export function ArticleCard({ post }: { post: PostPreview }) {
@@ -30,18 +32,25 @@ export function ArticleCard({ post }: { post: PostPreview }) {
           ))}
         </div>
         <Link href={`/articles/${post.slug}`}>
-          <h3 className="text-lg font-semibold leading-snug transition group-hover:text-primary">
+          <h3 className="text-lg font-semibold leading-snug text-primary transition group-hover:opacity-90">
             {post.title}
           </h3>
         </Link>
         <p className="text-sm text-muted-foreground line-clamp-2">
-          {post.description || "Un guide pratique pour accelerer votre croissance."}
+          {post.description ? (
+            post.description
+          ) : (
+            <Trans
+              fr="Un guide pratique pour accélérer votre croissance."
+              en="A practical guide to accelerate your growth."
+            />
+          )}
         </p>
       </CardContent>
       <CardFooter className="flex items-center justify-between px-5 pb-5 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1">
           <Calendar className="h-3.5 w-3.5" />
-          {post.published_at ? new Date(post.published_at).toLocaleDateString("fr-FR") : ""}
+          {post.published_at ? <LocalizedDate date={post.published_at} /> : ""}
         </span>
         <span className="inline-flex items-center gap-1">
           <Clock className="h-3.5 w-3.5" />

@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Trans } from "@/components/Trans";
 
 export function Pagination({
   currentPage,
@@ -25,24 +26,43 @@ export function Pagination({
   return (
     <div className="flex items-center justify-between">
       {currentPage <= 1 ? (
-        <Button variant="outline" disabled>
-          Precedent
+        <Button
+          disabled
+          className="border-[#FFD700] bg-[#FFD700] text-[#2D0A49] hover:bg-[#FFD700]/90"
+        >
+          <Trans fr="Précédent" en="Previous" />
         </Button>
       ) : (
-        <Button asChild variant="outline">
-          <Link href={buildHref(currentPage - 1)}>Precedent</Link>
+        <Button
+          asChild
+          className="border-[#FFD700] bg-[#FFD700] text-[#2D0A49] hover:bg-[#FFD700]/90"
+        >
+          <Link href={buildHref(currentPage - 1)}>
+            <Trans fr="Précédent" en="Previous" />
+          </Link>
         </Button>
       )}
       <span className="text-sm text-muted-foreground">
-        Page {currentPage} sur {totalPages}
+        <Trans
+          fr={`Page ${currentPage} sur ${totalPages}`}
+          en={`Page ${currentPage} of ${totalPages}`}
+        />
       </span>
       {currentPage >= totalPages ? (
-        <Button variant="outline" disabled>
-          Suivant
+        <Button
+          disabled
+          className="border-[#FFD700] bg-[#FFD700] text-[#2D0A49] hover:bg-[#FFD700]/90"
+        >
+          <Trans fr="Suivant" en="Next" />
         </Button>
       ) : (
-        <Button asChild variant="outline">
-          <Link href={buildHref(currentPage + 1)}>Suivant</Link>
+        <Button
+          asChild
+          className="border-[#FFD700] bg-[#FFD700] text-[#2D0A49] hover:bg-[#FFD700]/90"
+        >
+          <Link href={buildHref(currentPage + 1)}>
+            <Trans fr="Suivant" en="Next" />
+          </Link>
         </Button>
       )}
     </div>

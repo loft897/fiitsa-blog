@@ -13,9 +13,9 @@ export async function generateMetadata({
   const { slug } = params;
   return {
     title: `Categorie ${slug}`,
-    description: `Articles Fiitsa dans la categorie ${slug}.`,
+    description: `Articles Fiitsa dans la catégorie ${slug}.`,
     alternates: {
-      canonical: `/categories/${slug}`,
+      canonical: `/catégories/${slug}`,
     },
   };
 }
@@ -43,13 +43,13 @@ export default async function CategoryPage({
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {result.data.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            Aucun article pour cette categorie.
+            Aucun article pour cette catégorie.
           </p>
         ) : (
           result.data.map((post) => <ArticleCard key={post.id} post={post} />)
         )}
       </div>
-      <Pagination currentPage={page} totalPages={totalPages} basePath={`/categories/${slug}`} />
+      <Pagination currentPage={page} totalPages={totalPages} basePath={`/catégories/${slug}`} />
     </div>
   );
 }

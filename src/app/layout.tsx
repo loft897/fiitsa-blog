@@ -1,9 +1,8 @@
 ﻿import type { Metadata } from "next";
 import { Fira_Code, Space_Grotesk, Source_Sans_3 } from "next/font/google";
-import { ThemeProvider } from "next-themes";
-import { Toaster } from "@/components/ui/sonner";
 import { SEOJsonLd } from "@/components/SEOJsonLd";
 import { Shell } from "@/components/Shell";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const displayFont = Space_Grotesk({
@@ -26,21 +25,21 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://blog.fiitsa.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Fiitsa Blog - Strategies pour booster votre restau",
-    template: "%s | Fiitsa Blog",
+    default: "Fiitsa - Crée ta boutique en ligne en 3 minutes",
+    template: "%s | Fiitsa",
   },
   description:
-    "Le blog Fiitsa partage des strategies, outils et retours terrain pour accelerer la croissance des restaurants.",
+    "Fiitsa aide les entrepreneurs africains à créer leur boutique en ligne, vendre et encaisser avec mobile money.",
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
     type: "website",
     url: siteUrl,
-    title: "Fiitsa Blog - Strategies pour booster votre restau",
+    title: "Fiitsa - Crée ta boutique en ligne en 3 minutes",
     description:
-      "Le blog Fiitsa partage des strategies, outils et retours terrain pour accelerer la croissance des restaurants.",
-    siteName: "Fiitsa Blog",
+      "Fiitsa aide les entrepreneurs africains à créer leur boutique en ligne, vendre et encaisser avec mobile money.",
+    siteName: "Fiitsa",
     locale: "fr_FR",
     images: [
       {
@@ -53,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fiitsa Blog - Strategies pour booster votre restau",
+    title: "Fiitsa - Crée ta boutique en ligne en 3 minutes",
     description:
-      "Le blog Fiitsa partage des strategies, outils et retours terrain pour accelerer la croissance des restaurants.",
+      "Fiitsa aide les entrepreneurs africains à créer leur boutique en ligne, vendre et encaisser avec mobile money.",
     images: ["/og-default.png"],
   },
   icons: {
@@ -71,35 +70,35 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <Providers>
           <Shell>{children}</Shell>
-          <Toaster richColors position="top-right" />
-          <SEOJsonLd
-            data={{
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Fiitsa",
-              url: siteUrl,
-              logo: `${siteUrl}/fiitsa-logo.png`,
-              sameAs: ["https://fiitsa.com"],
-            }}
-          />
-          <SEOJsonLd
-            data={{
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Fiitsa Blog",
-              url: siteUrl,
-              potentialAction: {
-                "@type": "SearchAction",
-                target: `${siteUrl}/articles?query={search_term_string}`,
-                "query-input": "required name=search_term_string",
-              },
-            }}
-          />
-        </ThemeProvider>
+        </Providers>
+        <SEOJsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Fiitsa",
+            url: siteUrl,
+            logo: `${siteUrl}/fiitsa-logo.png`,
+            sameAs: ["https://fiitsa.com"],
+          }}
+        />
+        <SEOJsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Fiitsa",
+            url: siteUrl,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: `${siteUrl}/blog?query={search_term_string}`,
+              "query-input": "required name=search_term_string",
+            },
+          }}
+        />
       </body>
     </html>
   );

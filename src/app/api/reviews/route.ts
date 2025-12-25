@@ -35,7 +35,7 @@ export async function POST(request: Request) {
   const parsed = reviewSchema.safeParse(body);
 
   if (!parsed.success) {
-    return NextResponse.json({ message: "Donnees invalides." }, { status: 400 });
+    return NextResponse.json({ message: "Données invalides." }, { status: 400 });
   }
 
   const { website, recaptchaToken, ...review } = parsed.data;

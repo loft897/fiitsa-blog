@@ -11,7 +11,7 @@ export default async function SearchPage() {
       <div>
         <h1 className="text-3xl font-semibold">Recherche</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Trouvez rapidement un sujet, un tag ou une categorie.
+          Trouvez rapidement un sujet, un tag ou une catégorie.
         </p>
       </div>
       <SearchClient posts={data} />

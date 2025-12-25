@@ -6,6 +6,32 @@ import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useLanguage } from "@/hooks/useLanguage";
+
+const copy = {
+  fr: {
+    searchPlaceholder: "Rechercher un article",
+    categoryPlaceholder: "Catégorie",
+    allCategories: "Toutes les catégories",
+    tagPlaceholder: "Tag",
+    allTags: "Tous les tags",
+    sortPlaceholder: "Trier",
+    sortRecent: "Plus récents",
+    sortPopular: "Plus populaires",
+    apply: "Appliquer",
+  },
+  en: {
+    searchPlaceholder: "Search an article",
+    categoryPlaceholder: "Category",
+    allCategories: "All categories",
+    tagPlaceholder: "Tag",
+    allTags: "All tags",
+    sortPlaceholder: "Sort",
+    sortRecent: "Most recent",
+    sortPopular: "Most popular",
+    apply: "Apply",
+  },
+} as const;
 
 export function ArticlesFilters({
   categories,
@@ -17,6 +43,8 @@ export function ArticlesFilters({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { language } = useLanguage();
+  const t = copy[language];
 
   const [query, setQuery] = useState(searchParams.get("query") || "");
   const [category, setCategory] = useState(searchParams.get("category") || "all");
@@ -43,16 +71,16 @@ export function ArticlesFilters({
         <Input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Rechercher un article"
+          placeholder={t.searchPlaceholder}
           className="pl-9"
         />
       </div>
       <Select value={category} onValueChange={setCategory}>
         <SelectTrigger>
-          <SelectValue placeholder="Categorie" />
+          <SelectValue placeholder={t.categoryPlaceholder} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Toutes les categories</SelectItem>
+          <SelectItem value="all">{t.allCategories}</SelectItem>
           {categories.map((item) => (
             <SelectItem key={item} value={item}>
               {item}
@@ -62,10 +90,10 @@ export function ArticlesFilters({
       </Select>
       <Select value={tag} onValueChange={setTag}>
         <SelectTrigger>
-          <SelectValue placeholder="Tag" />
+          <SelectValue placeholder={t.tagPlaceholder} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Tous les tags</SelectItem>
+          <SelectItem value="all">{t.allTags}</SelectItem>
           {tags.map((item) => (
             <SelectItem key={item} value={item}>
               {item}
@@ -76,15 +104,17 @@ export function ArticlesFilters({
       <div className="md:col-span-3">
         <Select value={sort} onValueChange={setSort}>
           <SelectTrigger>
-            <SelectValue placeholder="Trier" />
+            <SelectValue placeholder={t.sortPlaceholder} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="recent">Plus recents</SelectItem>
-            <SelectItem value="popular">Plus populaires</SelectItem>
+            <SelectItem value="recent">{t.sortRecent}</SelectItem>
+            <SelectItem value="popular">{t.sortPopular}</SelectItem>
           </SelectContent>
         </Select>
       </div>
-      <Button onClick={applyFilters}>Appliquer</Button>
+      <Button className="bg-[#FFD700] text-[#2D0A49] hover:bg-[#FFD700]/90" onClick={applyFilters}>
+        {t.apply}
+      </Button>
     </div>
   );
 }

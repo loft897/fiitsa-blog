@@ -29,9 +29,9 @@ export function Footer() {
           <p className="font-semibold">Navigation</p>
           <div className="flex flex-col gap-2 text-muted-foreground">
             <Link href="/articles">Articles</Link>
-            <Link href="/categories">Categories</Link>
+            <Link href="/catégories">Catégories</Link>
             <Link href="/tags">Tags</Link>
-            <Link href="/about">A propos</Link>
+            <Link href="/about">? propos</Link>
           </div>
         </div>
         <div className="space-y-3 text-sm">

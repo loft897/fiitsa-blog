@@ -73,7 +73,7 @@ export type Database = {
           user_agent: string | null;
           referrer: string | null;
           country: string | null;
-          region: string | null;
+          région: string | null;
           city: string | null;
           timezone: string | null;
           lat: number | null;
@@ -90,7 +90,7 @@ export type Database = {
           user_agent?: string | null;
           referrer?: string | null;
           country?: string | null;
-          region?: string | null;
+          région?: string | null;
           city?: string | null;
           timezone?: string | null;
           lat?: number | null;

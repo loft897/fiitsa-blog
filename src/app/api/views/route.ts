@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+﻿import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabaseServer";
 
 export async function POST(request: Request) {
@@ -34,7 +34,7 @@ export async function POST(request: Request) {
           Authorization: `Bearer ${supabaseAnonKey}`,
           apikey: supabaseAnonKey,
         },
-        body: JSON.stringify({ ip_address: ip }),
+        body: JSON.stringify({}),
       });
 
       if (response.ok) {

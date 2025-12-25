@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { ArticleCard } from "@/components/ArticleCard";
 import { ArticlesFilters } from "@/components/ArticlesFilters";
 import { Pagination } from "@/components/Pagination";
+import { Trans } from "@/components/Trans";
 import { getCategories, getTags, listPosts } from "@/lib/posts";
 
 export const revalidate = 120;
@@ -49,18 +50,23 @@ export default async function ArticlesPage({
   if (searchParams?.sort) queryParams.set("sort", searchParams.sort);
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 [--primary:51_100%_50%] [--primary-foreground:45_100%_10%]">
       <div>
-        <h1 className="text-3xl font-semibold">Tous les articles</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Explorez des strategies actionnables pour vos restaurants.
+        <h1 className="text-3xl font-semibold text-primary">
+          <Trans fr="Tous les articles" en="All articles" />
+        </h1>
+        <p className="mt-2 text-sm text-primary/80">
+          <Trans
+            fr="Explorez tous nos contenus autour du business en ligne, e-commerce et IA en Afrique."
+            en="Explore all our content about online business, e-commerce, and AI in Africa."
+          />
         </p>
       </div>
 
       <Suspense
         fallback={
           <div className="rounded-3xl border border-border/60 bg-background/80 p-4 text-sm text-muted-foreground">
-            Chargement des filtres...
+            <Trans fr="Chargement des articles filtrés..." en="Loading filtered articles..." />
           </div>
         }
       >
@@ -70,7 +76,10 @@ export default async function ArticlesPage({
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {result.data.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            Aucun article ne correspond a votre recherche.
+            <Trans
+              fr="Aucun article ne correspond à votre recherche."
+              en="No articles match your search."
+            />
           </p>
         ) : (
           result.data.map((post) => <ArticleCard key={post.id} post={post} />)

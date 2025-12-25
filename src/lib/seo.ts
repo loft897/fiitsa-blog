@@ -55,7 +55,7 @@ export function buildArticleJsonLd(post: Post) {
     dateModified: post.updated_at || post.published_at,
     author: {
       "@type": "Person",
-      name: post.author_name || "Equipe Fiitsa",
+      name: post.author_name || "Équipe Fiitsa",
     },
     image: post.cover_url ? [post.cover_url] : undefined,
     mainEntityOfPage: absoluteUrl(`/articles/${post.slug}`),

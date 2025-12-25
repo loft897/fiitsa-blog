@@ -1,7 +1,8 @@
-﻿import Link from "next/link";
+﻿import type { ReactNode } from "react";
+import Link from "next/link";
 
 export type Crumb = {
-  label: string;
+  label: ReactNode;
   href: string;
 };
 
