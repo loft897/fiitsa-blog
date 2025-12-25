@@ -20,7 +20,7 @@ const monoFont = Fira_Code({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fiitsa.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.fiitsa.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,9 +43,9 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     images: [
       {
-        url: "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Logo%20Fiitsa.png",
-        width: 1024,
-        height: 1024,
+        url: "/og-fiitsa.jpg",
+        width: 1200,
+        height: 630,
         alt: "Fiitsa",
       },
     ],
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: "Fiitsa - Crée ta boutique en ligne en 3 minutes",
     description:
       "Fiitsa aide les entrepreneurs africains à créer leur boutique en ligne, vendre et encaisser avec mobile money.",
-    images: ["https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Logo%20Fiitsa.png"],
+    images: ["/og-fiitsa.jpg"],
   },
   icons: {
     icon: "/icon.png",

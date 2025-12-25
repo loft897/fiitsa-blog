@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Blog",
   description: "Retrouvez les articles Fiitsa sur l'e-commerce, l'IA et la business en ligne en Afrique.",
   alternates: {
-    canonical: "https://fiitsa.com/blog",
+    canonical: "https://www.fiitsa.com/blog",
   },
 };
 

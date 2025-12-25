@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Contact Fiitsa",
   description: "Contactez Fiitsa pour une demo, un accompagnement ou une question.",
   alternates: {
-    canonical: "https://fiitsa.com/contact",
+    canonical: "https://www.fiitsa.com/contact",
   },
 };
 

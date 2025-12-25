@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Decouvrez la mission de Fiitsa et notre engagement pour l'entrepreneuriat africain.",
   alternates: {
-    canonical: "https://fiitsa.com/about",
+    canonical: "https://www.fiitsa.com/about",
   },
 };
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Découvrez les fonctionnalites Fiitsa pour vendre produits, services et formations en Afrique.",
   alternates: {
-    canonical: "https://fiitsa.com/features",
+    canonical: "https://www.fiitsa.com/features",
   },
 };
 
