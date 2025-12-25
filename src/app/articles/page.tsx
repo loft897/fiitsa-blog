@@ -14,6 +14,28 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/articles",
   },
+  openGraph: {
+    title: "Articles",
+    description: "Tous les articles Fiitsa pour booster la croissance des restaurants.",
+    url: "https://www.fiitsa.com/articles",
+    type: "website",
+    images: [
+      {
+        url: "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Fiitsa%20arrondi%20sans%20bg%20(1200%20x%20630%20px).png",
+        width: 1200,
+        height: 630,
+        alt: "Fiitsa",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Articles",
+    description: "Tous les articles Fiitsa pour booster la croissance des restaurants.",
+    images: [
+      "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Fiitsa%20arrondi%20sans%20bg%20(1200%20x%20630%20px).png",
+    ],
+  },
 };
 
 export default async function ArticlesPage({
