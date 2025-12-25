@@ -84,8 +84,8 @@ export default async function ArticlePage({
                 post.description
               ) : (
                 <Trans
-                  fr="Un guide complet pour accélérer la croissance de votre restaurant."
-                  en="A complete guide to accelerate your restaurant's growth."
+                  fr="Un guide complet pour accélérer la croissance de votre business."
+                  en="A complete guide to accelerate your business's growth."
                 />
               )}
             </p>

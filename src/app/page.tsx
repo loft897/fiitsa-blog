@@ -5,14 +5,14 @@ import HomeClient from "@/app/HomeClient";
 const ogImage = "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Logo%20Fiitsa.png";
 
 export const metadata: Metadata = {
-  title: "Fiitsa - Ta boutique. Tes rиgles. Tes gains.",
+  title: "Fiitsa - Ta boutique. Tes règles. Tes gains.",
   description:
     "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intйgrй dans 13 pays.",
   alternates: {
     canonical: "https://fiitsa.com",
   },
   openGraph: {
-    title: "Fiitsa - Ta boutique. Tes rиgles. Tes gains.",
+    title: "Fiitsa - Ta boutique. Tes règles. Tes gains.",
     description:
       "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intйgrй dans 13 pays.",
     url: "https://fiitsa.com",

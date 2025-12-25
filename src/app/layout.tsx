@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/icon.png",
-    apple: "/fiitsa-logo.png",
+    apple: "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Logo%20Fiitsa.png",
   },
 };
 
