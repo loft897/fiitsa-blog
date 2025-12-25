@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fiitsa - Ta boutique. Tes rиgles. Tes gains.",
     description:
-      "Plateforme de vente en ligne adaptйe au marchй africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intйgrй dans 13 pays.",
+      "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intйgrй dans 13 pays.",
     images: [ogImage],
   },
 };
