@@ -1,24 +1,30 @@
 ﻿import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { getCatégories } from "@/lib/posts";
+import { Trans } from "@/components/Trans";
+import { getCategories } from "@/lib/posts";
 
 export const revalidate = 300;
 
-export default async function CatégoriesPage() {
-  const catégories = await getCatégories();
+export default async function CategoriesPage() {
+  const categories = await getCategories();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 [--primary:51_100%_50%] [--primary-foreground:45_100%_10%]">
       <div>
-        <h1 className="text-3xl font-semibold">Catégories</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Retrouvez tous nos sujets classes par catégories.
+        <h1 className="text-3xl font-semibold text-primary">
+          <Trans fr="Catégories" en="Categories" />
+        </h1>
+        <p className="mt-2 text-sm text-primary/80">
+          <Trans
+            fr="Retrouvez tous nos sujets classés par catégorie."
+            en="Browse all topics grouped by category."
+          />
         </p>
       </div>
       <div className="flex flex-wrap gap-2">
-        {catégories.map((category) => (
+        {categories.map((category) => (
           <Badge key={category} variant="secondary" className="text-sm">
-            <Link href={`/catégories/${category}`}>{category}</Link>
+            <Link href={`/categories/${category}`}>{category}</Link>
           </Badge>
         ))}
       </div>

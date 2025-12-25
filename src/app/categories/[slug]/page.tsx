@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Pagination } from "@/components/Pagination";
+import { Trans } from "@/components/Trans";
 import { listPosts } from "@/lib/posts";
 
 export const revalidate = 120;
@@ -12,10 +13,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = params;
   return {
-    title: `Categorie ${slug}`,
+    title: `Catégorie ${slug}`,
     description: `Articles Fiitsa dans la catégorie ${slug}.`,
     alternates: {
-      canonical: `/catégories/${slug}`,
+      canonical: `/categories/${slug}`,
     },
   };
 }
@@ -35,21 +36,23 @@ export default async function CategoryPage({
   const totalPages = result.count ? Math.ceil(result.count / pageSize) : 1;
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10 [--primary:51_100%_50%] [--primary-foreground:45_100%_10%]">
       <div>
-        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Categorie</p>
-        <h1 className="mt-2 text-3xl font-semibold">{slug}</h1>
+        <p className="text-xs uppercase tracking-[0.2em] text-primary/70">
+          <Trans fr="Catégorie" en="Category" />
+        </p>
+        <h1 className="mt-2 text-3xl font-semibold text-primary">{slug}</h1>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {result.data.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            Aucun article pour cette catégorie.
+            <Trans fr="Aucun article pour cette catégorie." en="No articles for this category." />
           </p>
         ) : (
           result.data.map((post) => <ArticleCard key={post.id} post={post} />)
         )}
       </div>
-      <Pagination currentPage={page} totalPages={totalPages} basePath={`/catégories/${slug}`} />
+      <Pagination currentPage={page} totalPages={totalPages} basePath={`/categories/${slug}`} />
     </div>
   );
 }
