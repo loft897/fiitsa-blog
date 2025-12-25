@@ -46,13 +46,16 @@ export function ArticlesFilters({
   const { language } = useLanguage();
   const t = copy[language];
 
-  const [query, setQuery] = useState(searchParams.get("query") || "");
-  const [category, setCategory] = useState(searchParams.get("category") || "all");
-  const [tag, setTag] = useState(searchParams.get("tag") || "all");
-  const [sort, setSort] = useState(searchParams.get("sort") || "recent");
+  const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("all");
+  const [tag, setTag] = useState("all");
+  const [sort, setSort] = useState("recent");
 
   useEffect(() => {
     setQuery(searchParams.get("query") || "");
+    setCategory(searchParams.get("category") || "all");
+    setTag(searchParams.get("tag") || "all");
+    setSort(searchParams.get("sort") || "recent");
   }, [searchParams]);
 
   const applyFilters = () => {

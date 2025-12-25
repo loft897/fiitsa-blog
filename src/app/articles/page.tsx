@@ -19,24 +19,25 @@ export const metadata: Metadata = {
 export default async function ArticlesPage({
   searchParams,
 }: {
-  searchParams?: {
+  searchParams?: Promise<{
     query?: string;
     category?: string;
     tag?: string;
     sort?: "recent" | "popular";
     page?: string;
-  };
+  }>;
 }) {
-  const page = Number(searchParams?.page || 1);
+  const resolvedSearchParams = await searchParams;
+  const page = Number(resolvedSearchParams?.page || 1);
   const pageSize = 9;
   const [categories, tags, result] = await Promise.all([
     getCategories(),
     getTags(),
     listPosts({
-      query: searchParams?.query,
-      tag: searchParams?.tag,
-      category: searchParams?.category,
-      sort: searchParams?.sort || "recent",
+      query: resolvedSearchParams?.query,
+      tag: resolvedSearchParams?.tag,
+      category: resolvedSearchParams?.category,
+      sort: resolvedSearchParams?.sort || "recent",
       page,
       pageSize,
     }),
@@ -44,10 +45,10 @@ export default async function ArticlesPage({
 
   const totalPages = result.count ? Math.ceil(result.count / pageSize) : 1;
   const queryParams = new URLSearchParams();
-  if (searchParams?.query) queryParams.set("query", searchParams.query);
-  if (searchParams?.category) queryParams.set("category", searchParams.category);
-  if (searchParams?.tag) queryParams.set("tag", searchParams.tag);
-  if (searchParams?.sort) queryParams.set("sort", searchParams.sort);
+  if (resolvedSearchParams?.query) queryParams.set("query", resolvedSearchParams.query);
+  if (resolvedSearchParams?.category) queryParams.set("category", resolvedSearchParams.category);
+  if (resolvedSearchParams?.tag) queryParams.set("tag", resolvedSearchParams.tag);
+  if (resolvedSearchParams?.sort) queryParams.set("sort", resolvedSearchParams.sort);
 
   return (
     <div className="space-y-10 [--primary:51_100%_50%] [--primary-foreground:45_100%_10%]">

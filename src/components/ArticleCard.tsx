@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { LocalizedDate } from "@/components/LocalizedDate";
 import { Trans } from "@/components/Trans";
@@ -47,15 +48,22 @@ export function ArticleCard({ post }: { post: PostPreview }) {
           )}
         </p>
       </CardContent>
-      <CardFooter className="flex items-center justify-between px-5 pb-5 text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1">
-          <Calendar className="h-3.5 w-3.5" />
-          {post.published_at ? <LocalizedDate date={post.published_at} /> : ""}
-        </span>
-        <span className="inline-flex items-center gap-1">
-          <Clock className="h-3.5 w-3.5" />
-          {post.reading_time || 5} min
-        </span>
+      <CardFooter className="flex items-center justify-between gap-3 px-5 pb-5 text-xs text-muted-foreground">
+        <div className="inline-flex flex-wrap items-center gap-3">
+          <span className="inline-flex items-center gap-1">
+            <Calendar className="h-3.5 w-3.5" />
+            {post.published_at ? <LocalizedDate date={post.published_at} /> : ""}
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <Clock className="h-3.5 w-3.5" />
+            {post.reading_time || 5} min
+          </span>
+        </div>
+        <Button asChild size="sm" variant="secondary">
+          <Link href={`/articles/${post.slug}`}>
+            <Trans fr="Lire" en="Read" />
+          </Link>
+        </Button>
       </CardFooter>
     </Card>
   );
