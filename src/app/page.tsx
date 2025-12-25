@@ -7,14 +7,14 @@ const ogImage = "https://api.fiitsa.com/storage/v1/object/public/fiitsa-files/Lo
 export const metadata: Metadata = {
   title: "Fiitsa - Ta boutique. Tes règles. Tes gains.",
   description:
-    "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intйgrй dans 13 pays.",
+    "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intégré dans +13 pays.",
   alternates: {
     canonical: "https://fiitsa.com",
   },
   openGraph: {
     title: "Fiitsa - Ta boutique. Tes règles. Tes gains.",
     description:
-      "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intйgrй dans 13 pays.",
+      "Plateforme de vente en ligne adaptée au marché africain. Vends tes produits physiques et digitaux, et services avec seulement 7% de commission. Mobile Money intégré dans +13 pays.",
     url: "https://fiitsa.com",
     type: "website",
     images: [
