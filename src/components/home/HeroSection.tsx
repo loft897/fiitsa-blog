@@ -45,8 +45,8 @@ export default function HeroSection() {
             <div className="space-y-3 md:space-y-4">
               <h1 className="text-3xl font-black leading-tight text-fiitsa-dark sm:text-4xl md:text-5xl lg:text-6xl">
                 {language === "fr"
-                  ? "Crée ta boutique en 3 minutes et commence à vendre aujourd'hui"
-                  : "Create your store in 3 minutes and start selling today"}
+                  ? "Crée ta boutique en 3 minutes et commence à vendre aujourd'hui 🚀"
+                  : "Create your store in 3 minutes and start selling today 🚀"}
               </h1>
               <p className="text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
                 {language === "fr"
