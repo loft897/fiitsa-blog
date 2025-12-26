@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Articles",
   description: "Retrouvez les articles Fiitsa sur l'e-commerce, l'IA et la business en ligne en Afrique.",
   alternates: {
-    canonical: "/articles",
+    canonical: "https://www.fiitsa.com/articles",
   },
   openGraph: {
     title: "Articles",

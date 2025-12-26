@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { getAllPostSlugs, getCategories, getTags } from "@/lib/posts";
+import { topics } from "@/lib/topics";
 
 const staticRoutes = [
   "/",
@@ -9,6 +10,7 @@ const staticRoutes = [
   "/categories",
   "/tags",
   "/search",
+  "/topics",
   "/features",
   "/about",
   "/contact",
@@ -51,6 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     tags.forEach((tag) => {
       items.push({
         url: absoluteUrl(`/tags/${encodeURIComponent(tag)}`),
+        lastModified: now,
+      });
+    });
+
+    topics.forEach((topic) => {
+      items.push({
+        url: absoluteUrl(`/topics/${topic.slug}`),
         lastModified: now,
       });
     });
