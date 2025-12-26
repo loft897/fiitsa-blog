@@ -160,3 +160,19 @@ export async function listApprovedReviews(postId: string, page = 1, pageSize = 6
   if (error) throw error;
   return { data: (data || []) as Review[], count };
 }
+
+export async function getReviewStats(postId: string) {
+  const supabaseServer = requireSupabaseServer();
+  const { data, error } = await supabaseServer
+    .from("post_reviews")
+    .select("rating")
+    .eq("post_id", postId)
+    .eq("is_approved", true);
+
+  if (error) throw error;
+  const ratings = (data || []).map((row) => row.rating || 0);
+  const count = ratings.length;
+  const average = count ? ratings.reduce((sum, value) => sum + value, 0) / count : null;
+
+  return { count, average };
+}

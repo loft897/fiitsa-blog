@@ -1,4 +1,4 @@
-﻿import { Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { LocalizedDate } from "@/components/LocalizedDate";
 import { Pagination } from "@/components/Pagination";
 import { ReviewForm } from "@/components/ReviewForm";
@@ -12,6 +12,7 @@ export function Reviews({
   count,
   page,
   pageSize,
+  averageRating,
 }: {
   postId: string;
   postSlug: string;
@@ -19,8 +20,11 @@ export function Reviews({
   count: number | null;
   page: number;
   pageSize: number;
+  averageRating?: number | null;
 }) {
   const totalPages = count ? Math.ceil(count / pageSize) : 1;
+  const ratingLabel =
+    typeof averageRating === "number" ? averageRating.toFixed(1) : null;
 
   return (
     <section className="space-y-6">
@@ -31,6 +35,13 @@ export function Reviews({
             <span className="ml-2 text-sm font-medium text-primary/80">({count})</span>
           )}
         </h2>
+        {ratingLabel && typeof count === "number" && count > 0 && (
+          <p className="text-sm text-primary/80">
+            <Trans fr="Note moyenne" en="Average rating" />{" "}
+            <span className="font-semibold text-primary">{ratingLabel}/5</span>{" "}
+            <span className="text-primary/70">({count})</span>
+          </p>
+        )}
         <p className="text-sm text-primary/80">
           <Trans
             fr="Partagez votre expérience et aidez la communauté."
@@ -42,10 +53,7 @@ export function Reviews({
         <div className="grid gap-4 md:grid-cols-2">
           {reviews.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              <Trans
-                fr="Aucun avis approuvé pour le moment."
-                en="No approved reviews yet."
-              />
+              <Trans fr="Aucun avis approuvé pour le moment." en="No approved reviews yet." />
             </p>
           ) : (
             reviews.map((review) => (
@@ -57,7 +65,10 @@ export function Reviews({
                   <p className="text-sm font-semibold">
                     {review.name || <Trans fr="Lecteur anonyme" en="Anonymous reader" />}
                   </p>
-                  <div className="flex items-center gap-1 text-amber-500">
+                  <div
+                    className="flex items-center gap-1 text-amber-500"
+                    aria-label={`${review.rating}/5`}
+                  >
                     {Array.from({ length: review.rating }).map((_, index) => (
                       <Star key={index} className="h-4 w-4 fill-current" />
                     ))}

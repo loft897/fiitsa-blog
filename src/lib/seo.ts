@@ -1,5 +1,5 @@
-﻿import type { Metadata } from "next";
-import type { Post } from "@/lib/types";
+import type { Metadata } from "next";
+import type { Post, Review } from "@/lib/types";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.fiitsa.com";
 const defaultOgImage =
@@ -21,7 +21,7 @@ function stripMarkdown(input: string) {
 function toExcerpt(input: string, maxLength = 160) {
   if (!input) return "";
   if (input.length <= maxLength) return input;
-  return `${input.slice(0, maxLength - 1).trim()}…`;
+  return `${input.slice(0, maxLength - 1).trim()}.`;
 }
 
 export function formatSlugTitle(slug: string) {
@@ -78,8 +78,32 @@ export function buildBreadcrumbs(items: { name: string; url: string }[]) {
   };
 }
 
-export function buildArticleJsonLd(post: Post) {
+export function buildArticleJsonLd(
+  post: Post,
+  options?: {
+    aggregateRating?: { ratingValue: number; ratingCount: number };
+    reviews?: Review[];
+  }
+) {
   const fallbackDescription = post.description || toExcerpt(stripMarkdown(post.content || ""));
+  const reviewItems = options?.reviews?.length
+    ? options.reviews.map((review) => ({
+        "@type": "Review",
+        author: {
+          "@type": "Person",
+          name: review.name || "Anonymous",
+        },
+        reviewBody: review.message,
+        reviewRating: {
+          "@type": "Rating",
+          ratingValue: review.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+        datePublished: review.created_at,
+      }))
+    : undefined;
+
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -89,10 +113,20 @@ export function buildArticleJsonLd(post: Post) {
     dateModified: post.updated_at || post.published_at,
     author: {
       "@type": "Person",
-      name: post.author_name || "Équipe Fiitsa",
+      name: post.author_name || "Equipe Fiitsa",
     },
     image: post.cover_url ? [post.cover_url] : undefined,
     mainEntityOfPage: absoluteUrl(`/articles/${post.slug}`),
+    ...(options?.aggregateRating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: options.aggregateRating.ratingValue,
+            ratingCount: options.aggregateRating.ratingCount,
+          },
+        }
+      : {}),
+    ...(reviewItems ? { review: reviewItems } : {}),
     publisher: {
       "@type": "Organization",
       name: "Fiitsa",

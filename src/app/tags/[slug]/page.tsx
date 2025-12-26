@@ -80,7 +80,7 @@ export default async function TagPage({
       </div>
       <Pagination currentPage={page} totalPages={totalPages} basePath={`/tags/${slug}`} />
       <div className="text-sm text-muted-foreground">
-        Voir aussi toutes les categories et tags.{" "}
+        Voir aussi toutes les catégories et tags.{" "}
         <a className="text-primary underline" href="/categories">
           Categories
         </a>{" "}

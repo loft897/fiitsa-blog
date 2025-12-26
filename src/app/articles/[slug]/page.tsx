@@ -13,7 +13,13 @@ import { TOC } from "@/components/TOC";
 import { Trans } from "@/components/Trans";
 import { ViewTracker } from "@/components/ViewTracker";
 import { SEOJsonLd } from "@/components/SEOJsonLd";
-import { getAllPostSlugs, getPostBySlug, getSimilarPosts, listApprovedReviews } from "@/lib/posts";
+import {
+  getAllPostSlugs,
+  getPostBySlug,
+  getSimilarPosts,
+  listApprovedReviews,
+  getReviewStats,
+} from "@/lib/posts";
 import { buildArticleJsonLd, buildArticleMetadata, buildBreadcrumbs } from "@/lib/seo";
 import { estimateReadingTime } from "@/lib/content";
 
@@ -51,9 +57,10 @@ export default async function ArticlePage({
 
   const reviewsPage = Number(resolvedSearchParams?.reviewsPage || 1);
   const pageSize = 6;
-  const [reviewsResult, similarPosts] = await Promise.all([
+  const [reviewsResult, similarPosts, reviewStats] = await Promise.all([
     listApprovedReviews(post.id, reviewsPage, pageSize),
     getSimilarPosts(post),
+    getReviewStats(post.id),
   ]);
 
   const articleUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://fiitsa.com"}/articles/${post.slug}`;
@@ -170,6 +177,7 @@ export default async function ArticlePage({
         count={reviewsResult.count}
         page={reviewsPage}
         pageSize={pageSize}
+        averageRating={reviewStats.average}
       />
 
       {similarPosts.length > 0 && (
@@ -190,7 +198,18 @@ export default async function ArticlePage({
         </section>
       )}
 
-      <SEOJsonLd data={buildArticleJsonLd(post)} />
+      <SEOJsonLd
+        data={buildArticleJsonLd(post, {
+          aggregateRating:
+            reviewStats.count > 0 && reviewStats.average
+              ? {
+                  ratingValue: Number(reviewStats.average.toFixed(1)),
+                  ratingCount: reviewStats.count,
+                }
+              : undefined,
+          reviews: reviewsResult.data,
+        })}
+      />
       <SEOJsonLd
         data={buildBreadcrumbs([
           { name: "Accueil", url: "/" },
